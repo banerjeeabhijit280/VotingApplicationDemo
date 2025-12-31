@@ -2,6 +2,8 @@ package in.abhi.votezy.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,5 +29,6 @@ public class Candidate {
     private int voteCount=0;
 
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL) 
+    @JsonIgnore  // This helps the votes to be hidden when called using an external api like bruno
     private List<Vote> votes;   
 }
