@@ -10,10 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
-
+import lombok.AllArgsConstructor;
+import lombok.*;
 @Entity
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Voter {
     
     @Id
@@ -27,7 +30,7 @@ public class Voter {
     @Email(message = "Invalid email format")  // Validation to ensure email format is correct.
     private String email;
 
-    private boolean hasVoted=false;
+    private Boolean hasVoted=false;
 
     @OneToOne(mappedBy = "voter", cascade = CascadeType.ALL) // Bidirectional relationship. It means Vote entity has a field named 'voter' that owns the relationship.
     @JsonIgnore  //This tells jackson to not return this field in the json response 

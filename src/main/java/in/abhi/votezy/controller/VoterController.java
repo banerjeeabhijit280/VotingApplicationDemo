@@ -16,6 +16,7 @@ import in.abhi.votezy.entity.Voter;
 import in.abhi.votezy.service.VoterService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;

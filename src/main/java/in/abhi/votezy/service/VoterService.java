@@ -31,6 +31,7 @@ public class VoterService {
             throw new DuplicateResourceException("Voter with email id: "+voter.getEmail()+" Already exists");
 
         }
+        voter.setHasVoted(false);
         return voterRepository.save(voter);
 
     }
@@ -77,3 +78,4 @@ public class VoterService {
         return voter;
     }
 }
+   
