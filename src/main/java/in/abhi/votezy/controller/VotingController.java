@@ -40,8 +40,10 @@ public class VotingController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Vote>> getAllVotes(){
-        List <Vote>voteList=votingService.getAllVotes();
+    public ResponseEntity<List<Vote>> getAllVotes(@RequestParam Long voterId){
+        Voter voter = new Voter();
+        voter.setId(voterId);
+        List <Vote>voteList=votingService.getAllVotes(voter);
         return new ResponseEntity<>(voteList, HttpStatus.OK);
     }
 }
