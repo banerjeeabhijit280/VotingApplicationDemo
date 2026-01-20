@@ -1,6 +1,5 @@
 package in.abhi.votezy.controller;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import in.abhi.votezy.dto.VoteRequestDTO;
 import in.abhi.votezy.dto.VoteResponseDTO;
 import in.abhi.votezy.entity.Vote;
+import in.abhi.votezy.entity.Voter;
 import in.abhi.votezy.service.VotingService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -42,7 +42,7 @@ public class ElectionResultController {
 
     @GetMapping("/getAllResults")
     public ResponseEntity<List<ElectionResult>> getAllResults(){
-        List<ElectionResult> results = electionResultService.getAllResults();
+        List<ElectionResult> results = electionResultService.getAllElectionResults();
         return ResponseEntity.ok(results);
     }
 }
