@@ -1,4 +1,4 @@
-package in.abhi.votezy.Configuration;
+package in.abhi.votezy.configuration;
 
 import org.springframework.security.config.Customizer;
 
@@ -16,15 +16,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/**").authenticated()
-                .anyRequest().permitAll()
-            )
-            .httpBasic(Customizer.withDefaults())
-            .formLogin(form -> form.disable());
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/**").authenticated()
+                        .anyRequest().permitAll())
+                .httpBasic(Customizer.withDefaults())
+                .formLogin(form -> form.disable());
 
         return http.build();
     }
 }
-

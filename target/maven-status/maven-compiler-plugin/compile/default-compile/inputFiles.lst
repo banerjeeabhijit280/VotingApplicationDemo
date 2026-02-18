@@ -1,6 +1,5 @@
-/Users/abhijitbanerjee/VS_Code/Votezy/VotingApplicationDemo/src/main/java/com/example/demo/VotezyApplication.java
-/Users/abhijitbanerjee/VS_Code/Votezy/VotingApplicationDemo/src/main/java/in/abhi/votezy/Configuration/SecurityConfig.java
 /Users/abhijitbanerjee/VS_Code/Votezy/VotingApplicationDemo/src/main/java/in/abhi/votezy/VotezyApplication.java
+/Users/abhijitbanerjee/VS_Code/Votezy/VotingApplicationDemo/src/main/java/in/abhi/votezy/configuration/SecurityConfig.java
 /Users/abhijitbanerjee/VS_Code/Votezy/VotingApplicationDemo/src/main/java/in/abhi/votezy/controller/CandidateController.java
 /Users/abhijitbanerjee/VS_Code/Votezy/VotingApplicationDemo/src/main/java/in/abhi/votezy/controller/ElectionResultController.java
 /Users/abhijitbanerjee/VS_Code/Votezy/VotingApplicationDemo/src/main/java/in/abhi/votezy/controller/VoterController.java
