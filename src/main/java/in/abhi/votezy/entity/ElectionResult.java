@@ -2,7 +2,6 @@ package in.abhi.votezy.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,10 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
 
 @Entity
-@Data
 public class ElectionResult {
 
     @Id
@@ -22,7 +19,7 @@ public class ElectionResult {
 
     @NotBlank(message = "electionName can't be blank")
     private String electionName;
-    
+
     private int totalVotes;
 
     @OneToOne
@@ -30,8 +27,48 @@ public class ElectionResult {
     @JsonIgnore
     private Candidate winner;
 
+    public ElectionResult() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getElectionName() {
+        return electionName;
+    }
+
+    public void setElectionName(String electionName) {
+        this.electionName = electionName;
+    }
+
+    public int getTotalVotes() {
+        return totalVotes;
+    }
+
+    public void setTotalVotes(int totalVotes) {
+        this.totalVotes = totalVotes;
+    }
+
+    public Candidate getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Candidate winner) {
+        this.winner = winner;
+    }
+
     @JsonProperty("winnerId")
-    public Long getWinnerId(){
-        return winner!=null?winner.getId():null;
+    public Long getWinnerId() {
+        return winner != null ? winner.getId() : null;
+    }
+
+    @Override
+    public String toString() {
+        return "ElectionResult{id=" + id + ", electionName='" + electionName + "', totalVotes=" + totalVotes + "}";
     }
 }

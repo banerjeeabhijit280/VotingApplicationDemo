@@ -13,22 +13,34 @@ import in.abhi.votezy.repository.PasswordRepository;
 @Service
 public class PasswordService {
     private final PasswordRepository passwordRepository;
+    private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
     @Autowired
-    public PasswordService(PasswordRepository passwordRepository) {
+    public PasswordService(PasswordRepository passwordRepository,
+            org.springframework.security.crypto.password.PasswordEncoder passwordEncoder) {
         this.passwordRepository = passwordRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Passwords savePassword(Passwords password) {
         Passwords example = new Passwords();
-        example.setPassword(password.getPassword());
+        example.setUserId(password.getUserId()); // Check by UserId, not password!
         if (passwordRepository.exists(Example.of(example))) {
-             throw new DuplicateResourceException("Voter with password : "+password.getPassword()+" Already exists");
-        }   
+            throw new DuplicateResourceException("Voter with userId : " + password.getUserId() + " Already exists");
+        }
+
+        // Encrypt password before saving
+        password.setPassword(passwordEncoder.encode(password.getPassword()));
+
+        // Default role if not provided
+        if (password.getRole() == null || password.getRole().isEmpty()) {
+            password.setRole("VOTER");
+        }
+
         return passwordRepository.save(password);
     }
 
-    public List<Passwords> getAllPasswords(){
+    public List<Passwords> getAllPasswords() {
         return passwordRepository.findAll();
     }
 }

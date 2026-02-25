@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: in.abhi.votezy.VotezyApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.989 s -- in in.abhi.votezy.VotezyApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.395 s -- in in.abhi.votezy.VotezyApplicationTests

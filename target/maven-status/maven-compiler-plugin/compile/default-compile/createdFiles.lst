@@ -15,7 +15,9 @@ in/abhi/votezy/exception/GlobalExceptionHandler.class
 in/abhi/votezy/service/VotingService.class
 in/abhi/votezy/configuration/SecurityConfig.class
 in/abhi/votezy/entity/Vote.class
+in/abhi/votezy/configuration/DataInitializer.class
 in/abhi/votezy/dto/ElectionResultResponseDTO.class
+in/abhi/votezy/service/CustomUserDetailsService.class
 in/abhi/votezy/service/PasswordService.class
 in/abhi/votezy/controller/VoterController.class
 in/abhi/votezy/controller/CandidateController.class
