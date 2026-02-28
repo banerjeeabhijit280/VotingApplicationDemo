@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votezy - Secure Election System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app-container">
+        <!-- Toast Notification Area -->
+        <div id="toast-container"></div>
+
+        <!-- Login View -->
+        <div id="view-login" class="view active glass-panel">
+            <div class="logo-container">
+                <div class="logo-icon">V</div>
+                <h1>Votezy</h1>
+            </div>
+            <p class="subtitle">Secure Voting Application</p>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="username">User ID (or 'admin')</label>
+                    <input type="text" id="username" required placeholder="Enter your ID">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="Enter password">
+                </div>
+                <!-- Adding role selector for login flexibility, though basic auth determines role implicitly -->
+                <div class="input-group">
+                    <label for="login-role">Login As</label>
+                    <select id="login-role">
+                        <option value="VOTER">VOTER</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+        </div>
+
+        <!-- Admin Dashboard -->
+        <div id="view-admin" class="view hidden">
+            <header class="dashboard-header glass-panel">
+                <h2>Admin Dashboard</h2>
+                <button id="admin-logout" class="btn btn-outline logout-btn">Logout</button>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Add Candidate Panel -->
+                <div class="panel glass-panel">
+                    <h3>Add Candidate</h3>
+                    <form id="add-candidate-form">
+                        <div class="input-group">
+                            <label for="cand-name">Candidate Name</label>
+                            <input type="text" id="cand-name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="cand-party">Party</label>
+                            <input type="text" id="cand-party" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                </div>
+
+                <!-- Add Voter / Password Panel -->
+                <div class="panel glass-panel">
+                    <h3>Register Voter Entity</h3>
+                    <form id="add-voter-form">
+                        <div class="input-group">
+                            <label for="voter-name">Voter Name</label>
+                            <input type="text" id="voter-name" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="voter-email">Voter Email</label>
+                            <input type="email" id="voter-email" required placeholder="voter@example.com">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+
+                    <h3 style="margin-top: 2rem;">Set Password (Auth)</h3>
+                    <form id="add-password-form">
+                        <div class="input-group">
+                            <label for="login-user-id">User ID / Username</label>
+                            <input type="text" id="login-user-id" placeholder="admin" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="pwd-password">Password</label>
+                            <input type="password" id="pwd-password" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="pwd-role">Role</label>
+                            <select id="pwd-role">
+                                <option value="VOTER">VOTER</option>
+                                <option value="ADMIN">ADMIN</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Set Password</button>
+                    </form>
+                </div>
+
+                <!-- Declare Results Panel -->
+                <div class="panel glass-panel">
+                    <h3>Election Actions</h3>
+                    <form id="declare-result-form">
+                        <div class="input-group">
+                            <label for="election-name-input">Election Name</label>
+                            <input type="text" id="election-name-input" required
+                                placeholder="e.g. General Election 2026">
+                        </div>
+                        <button type="submit" class="btn btn-warning">Declare Result</button>
+                    </form>
+                    <button id="view-results-btn" class="btn btn-secondary" style="margin-top: 1rem; width: 100%;">View
+                        All Results</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voter Dashboard -->
+        <div id="view-voter" class="view hidden">
+            <header class="dashboard-header glass-panel">
+                <h2>Voter Dashboard</h2>
+                <div class="header-actions">
+                    <span id="voter-id-display"></span>
+                    <button id="voter-logout" class="btn btn-outline logout-btn">Logout</button>
+                </div>
+            </header>
+
+            <div class="panel glass-panel main-panel">
+                <div class="panel-header">
+                    <h3>Available Candidates</h3>
+                    <button id="refresh-candidates" class="btn btn-icon">↻</button>
+                </div>
+                <div id="candidates-list" class="list-container">
+                    <!-- Dynamic Candidate Items -->
+                    <div class="loading-spinner">Loading candidates...</div>
+                </div>
+            </div>
+
+            <div class="panel glass-panel main-panel" style="margin-top: 2rem;">
+                <div class="panel-header">
+                    <h3>My Votes</h3>
+                    <button id="refresh-votes" class="btn btn-icon">↻</button>
+                </div>
+                <div id="my-votes-list" class="list-container">
+                    <!-- Dynamic Vote Items -->
+                    <div class="loading-spinner">Loading votes...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results View -->
+        <div id="view-results" class="view hidden">
+            <header class="dashboard-header glass-panel">
+                <h2>Election Results</h2>
+                <button id="back-to-admin" class="btn btn-outline">Back</button>
+            </header>
+
+            <div class="panel glass-panel main-panel">
+                <div id="results-list" class="list-container">
+                    <!-- Dynamic Result Items -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
