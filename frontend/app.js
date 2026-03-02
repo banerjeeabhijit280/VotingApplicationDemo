@@ -150,7 +150,17 @@ document.getElementById('add-voter-form').addEventListener('submit', async (e) =
         document.getElementById('pwd-username').value = res.id;
         e.target.reset();
     } catch (error) {
-        showToast('Failed to register voter entity.', 'error');
+        console.error("Voter registration error:", error);
+        let displayMessage = 'Failed to register voter entity.';
+        try {
+            const errorObj = JSON.parse(error.message.replace('API Error: Error: ', ''));
+            if (errorObj.messageString) displayMessage = errorObj.messageString;
+        } catch (e) {
+            if (error.message && !error.message.includes('HTTP error!')) {
+                displayMessage = error.message;
+            }
+        }
+        showToast(displayMessage, 'error');
     }
 });
 
@@ -168,7 +178,17 @@ document.getElementById('add-password-form').addEventListener('submit', async (e
         showToast(`Authentication set for User ID: ${userId}`);
         e.target.reset();
     } catch (error) {
-        showToast('Failed to set password.', 'error');
+        console.error("Password setup error:", error);
+        let displayMessage = 'Failed to set password.';
+        try {
+            const errorObj = JSON.parse(error.message.replace('API Error: Error: ', ''));
+            if (errorObj.messageString) displayMessage = errorObj.messageString;
+        } catch (e) {
+            if (error.message && !error.message.includes('HTTP error!')) {
+                displayMessage = error.message;
+            }
+        }
+        showToast(displayMessage, 'error');
     }
 });
 
